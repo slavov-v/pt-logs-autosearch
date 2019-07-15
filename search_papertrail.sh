@@ -8,6 +8,7 @@ SEARCH_TERMS_END=$#
 
 AWK_ARG='$0'
 
+# `curl` command from papertrail docs -> https://help.papertrailapp.com/kb/how-it-works/permanent-log-archives/#download-a-large-number-of-archives
 curl -sH "X-Papertrail-Token: ${PAPERTRAIL_TOKEN}" https://papertrailapp.com/api/v1/archives.json |
   grep -o '"filename":"[^"]*"' | egrep -o '[0-9-]+' |
   awk "$AWK_ARG >= \"$START_DATE\" && $AWK_ARG < \"$END_DATE\" {
